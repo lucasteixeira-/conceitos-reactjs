@@ -21,14 +21,14 @@ function App() {
 		});
 
         const repository = response.data;
-
-        setRepositories([...repositories, repository])
+		setRepositories([...repositories, repository])
 	}
 
 	async function handleRemoveRepository(id) {
-		api.delete(`/repositories/${id}`).then(response => {
-			window.location.reload();
-		})
+		await api.delete(`/repositories/${id}`)
+		setRepositories(repositories.filter(
+			repository => repository.id !== id
+		))
 	}
 
 	return (
